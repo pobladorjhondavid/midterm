@@ -1,0 +1,942 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Leadership | USC AKWE</title>
+
+<style>
+:root {
+    --bg: #ffc2d9;
+    --dots: #ffb0cd;
+    --paper: #fffdfd;
+    --ink: #3b0d24;
+    --soft: #7d3b58;
+    --hot: #e91e78;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: Arial, sans-serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(var(--dots) 2px, transparent 2px);
+    background-size: 26px 26px;
+}
+
+.wrap {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0 25px;
+    gap: 20px;
+}
+
+.sticker {
+    display: inline-block;
+    background: var(--hot);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 55px;
+    line-height: 1;
+    margin: 0;
+}
+
+header p {
+    color: var(--soft);
+    max-width: 500px;
+}
+
+.search input {
+    padding: 12px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 30px;
+    font-size: 15px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0 25px;
+}
+
+.chips button,
+.day-tabs button {
+    padding: 10px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 30px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.chips button:hover,
+.day-tabs button:hover {
+    background: var(--paper);
+}
+
+.chips button[aria-pressed="true"],
+.day-tabs button.active {
+    background: var(--ink);
+    color: white;
+}
+
+/* LEADERSHIP */
+
+.group {
+    margin: 35px 0;
+}
+
+.group h2 {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.group h2::after {
+    content: "";
+    flex: 1;
+    border-top: 3px dashed var(--ink);
+}
+
+.count {
+    background: white;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.polaroid {
+    width: 220px;
+    background: white;
+    padding: 12px 12px 18px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(120,20,70,.2);
+    transform: rotate(-1deg);
+    position: relative;
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(1.5deg);
+}
+
+.polaroid img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #ffd9e8;
+}
+
+.polaroid h3 {
+    font-size: 15px;
+    margin: 12px 0 5px;
+}
+
+.role {
+    color: var(--hot);
+    margin-top: 5px;
+}
+
+.unit {
+    font-size: 12px;
+    margin-top: 5px;
+    color: var(--soft);
+}
+
+/* USC AKWE ACTIVITIES */
+
+#activities {
+    display: none;
+    padding: 25px 0;
+}
+
+#activities.visible {
+    display: block;
+}
+
+.activity-heading {
+    background: white;
+    text-align: center;
+    padding: 35px 15px;
+    border: 2px dashed var(--hot);
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.activity-heading h2 {
+    font-size: 45px;
+    margin: 10px 0;
+}
+
+.activity-heading p {
+    color: var(--soft);
+}
+
+.day-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.day-tabs button {
+    padding: 12px 35px;
+    font-size: 16px;
+}
+
+.day-panel {
+    display: none;
+}
+
+.day-panel.active {
+    display: block;
+}
+
+.day-title {
+    font-size: 28px;
+    margin: 30px 0 20px;
+}
+
+.activity-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.activity-card {
+    background: white;
+    padding: 12px;
+    box-shadow: 0 8px 18px rgba(120,20,70,.2);
+}
+
+.activity-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    background: #ffd9e8;
+}
+
+.activity-card h3 {
+    margin: 12px 0 5px;
+    font-size: 16px;
+}
+
+.activity-card p {
+    color: var(--soft);
+    font-size: 13px;
+}
+
+.activity-time {
+    display: inline-block;
+    background: var(--hot);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.activity-video-card {
+    background: white;
+    padding: 15px;
+    margin-top: 30px;
+    box-shadow: 0 8px 18px rgba(120,20,70,.2);
+}
+
+.activity-video-card video {
+    width: 100%;
+    max-height: 500px;
+    background: black;
+}
+
+.day-note {
+    background: white;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+    border-left: 6px solid var(--hot);
+}
+
+footer {
+    margin-top: 50px;
+    background: var(--ink);
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+@media(max-width:700px) {
+    .activity-board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+}
+
+@media(max-width:450px) {
+    .activity-board {
+        grid-template-columns: 1fr;
+    }
+
+    .polaroid {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header>
+    <div>
+        <span class="sticker">ITPE3 · Web Systems Technologies</span>
+        <h1>Campus<br>Leadership</h1>
+        <p>
+            Faces behind the university: leaders, administrators,
+            deans, faculty, and staff of the College of Informatics
+            and Computing Innovations.
+        </p>
+    </div>
+
+    <div class="search">
+        <input type="text" id="q" placeholder="Search a name or role...">
+    </div>
+</header>
+
+<div class="chips" id="chips"></div>
+
+<main id="out"></main>
+
+<!-- USC AKWE ACTIVITIES -->
+
+<section id="activities">
+
+    <div class="activity-heading">
+        <span class="sticker">SPECIAL CAMPUS EVENT</span>
+        <h2>USC AKWE</h2>
+        <p>Two days of fun, friendship, and unforgettable memories!</p>
+    </div>
+
+    <div class="day-tabs">
+        <button class="active" onclick="showDay('day1',this)">DAY 1</button>
+        <button onclick="showDay('day2',this)">DAY 2</button>
+    </div>
+
+    <!-- DAY 1 -->
+
+    <div class="day-panel active" id="day1">
+
+        <h2 class="day-title">🌸 DAY 1 PHOTO GALLERY</h2>
+
+        <div class="activity-board">
+
+            <div class="activity-card">
+                <img src="1.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+            </div>
+
+            <div class="activity-card">
+                <img src="2.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                <img src="3.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+               <img src="4.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                <img src="5.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                <img src="6.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                <img src="7.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+               <img src="8.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                <img src="9.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+              <img src="10.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+              <img src="11.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                <img src="12.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                 <img src="13.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                 <img src="14.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+            <div class="activity-card">
+                <img src="15.jpg" alt="Day 1">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+            </div>
+
+        </div>
+
+        <div class="activity-video-card">
+            <h3>🎬 DAY 1 EVENT VIDEO</h3>
+            <video controls>
+                <source src="day1.mp4" type="video/mp4">
+                Your browser does not support video.
+            </video>
+        </div>
+
+        <div class="day-note">
+            💗 Day 1: A day of friendship, activities, and wonderful memories!
+        </div>
+
+    </div>
+
+    <!-- DAY 2 -->
+
+   <div class="day-panel" id="day2">
+
+    <h2 class="day-title">🎀 DAY 2 PHOTO GALLERY</h2>
+
+    <div class="activity-board">
+
+        <div class="activity-card">
+             <img src="16.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+        </div>
+
+        <div class="activity-card">
+           <img src="17.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+        </div>
+
+        <div class="activity-card">
+            <img src="18.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+        </div>
+
+        <div class="activity-card">
+           <img src="19.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+        </div>
+
+        <div class="activity-card">
+            <img src="20.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+
+        </div>
+
+        <div class="activity-card">
+            <img src="21.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+            <img src="22.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+             <img src="23.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+            <img src="24.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+          <img src="25.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+           <img src="26.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+           <img src="27.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+            <img src="28.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+             <img src="29.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+        <div class="activity-card">
+            <img src="30.jpg" alt="Day 2">
+                <span class="activity-time"></span>
+                <h3>Day 1 </h3>
+                <p>USC AKWE event memory.</p>
+        </div>
+
+    </div>
+</div>
+
+        <div class="activity-video-card">
+            <h3>🎬 DAY 2 EVENT VIDEO</h3>
+            <video controls>
+                <source src="day2.mp4" type="video/mp4">
+                Your browser does not support video.
+            </video>
+        </div>
+
+        <div class="day-note">
+            💗 Day 2: Celebrating friendship and unforgettable experiences!
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    Campus Leadership • USC AKWE • ITPE3 – Web Systems Technologies
+</footer>
+
+<script>
+
+/* LEADERSHIP DATA */
+
+const groups = [
+    {
+        id: "leaders",
+        label: "University & Campus",
+        people: [
+            {
+                name: "Dr. NORDY SIASON, JR., CESO VI",
+                role: "University President",
+                img: "president.png"
+            },
+            {
+                name: "MICHAEL B. DIZON, EdD, PhD",
+                role: "Campus Administrator",
+                img: "administrator.png"
+            },
+            {
+                name: "MELBY P. PARREÑO, MILE",
+                role: "Administrative Officer",
+                img: "administrative.jpg"
+            }
+        ]
+    },
+
+    {
+        id: "deans",
+        label: "College Deans",
+        people: [
+            {
+                name: "NOLI L. GERONA, PhD",
+                role: "Dean",
+                unit: "College of Agriculture",
+                img: "coag.jpg"
+            },
+            {
+                name: "JANICE H. CHING, DDM-ET",
+                role: "Dean",
+                unit: "College of Business, Management and Sustainable Development",
+                img: "cbmsd.jpg"
+            },
+            {
+                name: "RENE T. ESTOMO, PhD",
+                role: "Dean",
+                unit: "College of Education",
+                img: "coed.jpg"
+            },
+            {
+                name: "DR. WENDA D. PANES, EdD",
+                role: "Dean",
+                unit: "College of Informatics and Computing Innovations",
+                img: "cici.jpg"
+            }
+        ]
+    },
+
+    {
+        id: "faculty",
+        label: "CICI Faculty",
+        people: [
+            {
+                name: "ANALIZA ALINGALAN",
+                role: "Faculty Member",
+                img: "alingalan.jpg"
+            },
+            {
+                name: "WEENA J. BULNES",
+                role: "Faculty Member",
+                img: "bulnes.png"
+            },
+            {
+                name: "DYTHNE P. DACUDAO",
+                role: "Faculty Member",
+                img: "dacudao.jpg"
+            },
+            {
+                name: "ALLAN DAVE TAGACAY",
+                role: "Faculty Member",
+                img: "tagacay.jpg"
+            },
+            {
+                name: "IAN P. SUGATAN",
+                role: "Faculty Member",
+                img: "sugatan.png"
+            },
+            {
+                name: "IVAN SILVESTRE",
+                role: "Faculty Member",
+                img: "silvestre.jpg"
+            }
+        ]
+    },
+
+    {
+        id: "staff",
+        label: "CICI Staff",
+        people: [
+            {
+                name: "ANDREA DE LOS SANTOS",
+                role: "Staff Member",
+                img: "delossantos.png"
+            },
+            {
+                name: "JAY MICHAEL O. BORCILLO",
+                role: "Staff Member",
+                img: "borcillo.jpg"
+            },
+            {
+                name: "DWAYNE PADERNAL",
+                role: "Staff Member",
+                img: "padernal.jpg"
+            }
+        ]
+    }
+];
+
+/* DISPLAY LEADERSHIP */
+
+let active = "all";
+let term = "";
+
+const out = document.getElementById("out");
+const chips = document.getElementById("chips");
+const activities = document.getElementById("activities");
+
+function createCard(person) {
+
+    const figure = document.createElement("figure");
+    figure.className = "polaroid";
+
+    const image = document.createElement("img");
+    image.src = person.img;
+    image.alt = person.name;
+
+    const caption = document.createElement("figcaption");
+
+    const name = document.createElement("h3");
+    name.textContent = person.name;
+
+    const role = document.createElement("div");
+    role.className = "role";
+    role.textContent = person.role;
+
+    caption.append(name, role);
+
+    if (person.unit) {
+        const unit = document.createElement("div");
+        unit.className = "unit";
+        unit.textContent = person.unit;
+        caption.append(unit);
+    }
+
+    figure.append(image, caption);
+
+    return figure;
+}
+
+function render() {
+
+    out.innerHTML = "";
+
+    let shown = 0;
+
+    groups.forEach(group => {
+
+        if (active !== "all" && active !== group.id) {
+            return;
+        }
+
+        const people = group.people.filter(person => {
+
+            const details =
+                person.name + " " +
+                person.role + " " +
+                (person.unit || "");
+
+            return details.toLowerCase().includes(term);
+        });
+
+        if (people.length === 0) {
+            return;
+        }
+
+        shown += people.length;
+
+        const section = document.createElement("section");
+        section.className = "group";
+
+        const heading = document.createElement("h2");
+        heading.textContent = group.label;
+
+        const count = document.createElement("span");
+        count.className = "count";
+        count.textContent = people.length;
+
+        heading.append(count);
+
+        const board = document.createElement("div");
+        board.className = "board";
+
+        people.forEach(person => {
+            board.append(createCard(person));
+        });
+
+        section.append(heading, board);
+        out.append(section);
+
+    });
+
+    if (shown === 0) {
+        out.innerHTML = "<p>No results found.</p>";
+    }
+}
+
+/* NAVIGATION BUTTONS */
+
+const navigation = [
+    { id: "all", label: "Everyone" },
+    ...groups,
+    { id: "activities", label: "USC AKWE Activities" }
+];
+
+navigation.forEach(group => {
+
+    const button = document.createElement("button");
+
+    button.textContent = group.label;
+    button.type = "button";
+
+    button.setAttribute(
+        "aria-pressed",
+        group.id === active
+    );
+
+    button.onclick = function() {
+
+        active = group.id;
+
+        chips.querySelectorAll("button").forEach(item => {
+            item.setAttribute(
+                "aria-pressed",
+                item === button
+            );
+        });
+
+        if (group.id === "activities") {
+
+            out.style.display = "none";
+            activities.classList.add("visible");
+
+            document.getElementById("q").style.display = "none";
+
+        } else {
+
+            out.style.display = "block";
+            activities.classList.remove("visible");
+
+            document.getElementById("q").style.display = "block";
+
+            render();
+        }
+    };
+
+    chips.append(button);
+});
+
+/* SEARCH */
+
+document.getElementById("q").addEventListener("input", function() {
+
+    term = this.value.toLowerCase().trim();
+
+    render();
+
+});
+
+/* DAY 1 AND DAY 2 BUTTONS */
+
+function showDay(day, button) {
+
+    document.querySelectorAll(".day-panel").forEach(panel => {
+        panel.classList.remove("active");
+    });
+
+    document.querySelectorAll(".day-tabs button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    document.getElementById(day).classList.add("active");
+
+    button.classList.add("active");
+}
+
+/* START WEBSITE */
+
+render();
+
+</script>
+
+</body>
+</html>
